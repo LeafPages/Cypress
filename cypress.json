@@ -1,12 +1,8 @@
 {
-    "defaultCommandTimeout": 7000,
-    "reporter": "./node_modules/mochawesome/src/mochawesome.js",
-    "reporterOptions": {
-        "reportDir": "cypress/report/mochawesome-report",
-        "overwrite": false,
-        "html": true,
-        "json": true,
-        "timestamp": "mmddyyyy_HHMMss"
-     },
-     "screenshotsFolder": "./cypress/snaps"
-  }
+    "chromeWebSecurity": false,
+    "modifyObstructiveCode" : true,
+    "defaultCommandTimeout" : 30000,
+    "env": {
+        "allureResultsPath": "cypress/results"
+    }
+}
