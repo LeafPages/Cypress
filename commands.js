@@ -24,11 +24,22 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
+Cypress.Commands.add('iframe', { prevSubject: 'element' }, ($iframe) => {
+  const $iframeDoc = $iframe.contents()
+  const findBody = () => $iframeDoc.find('body')
+
+  /* if ($iframeDoc.prop('readyState') === 'complete') return findBody()
+  return Cypress.Promise((resolve) => $iframe.on('load', () => resolve(findBody()))) */
+  return findBody
+})
+
 Cypress.Commands.add('typeTab', (shiftKey, ctrlKey) => {
-    cy.focused().trigger('keydown', {
-        keyCode: 9,
-        which: 9,
-        shiftKey: shiftKey,
-        ctrlKey: ctrlKey
+  cy.focused().then(($el) => {
+    cy.wrap($el).trigger('keydown', {
+      keyCode: 9,
+      which: 9,
+      shiftKey: shiftKey,
+      ctrlKey: ctrlKey
     });
   });
+});
